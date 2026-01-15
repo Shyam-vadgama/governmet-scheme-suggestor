@@ -26,7 +26,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.mount("/ui", StaticFiles(directory="eligibility_agent/frontend", html=True), name="frontend")
+app.mount("/ui", StaticFiles(directory="frontend", html=True), name="frontend")
 
 app.include_router(auth.router)
 app.include_router(profile.router)
