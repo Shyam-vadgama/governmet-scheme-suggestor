@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eligibility Agent</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Auth Section -->
+    <div id="auth-section" class="container">
+        <h1>Eligibility Agent</h1>
+        <div class="tabs">
+            <button class="tab-btn active" onclick="showAuthTab('login')">Login</button>
+            <button class="tab-btn" onclick="showAuthTab('register')">Register</button>
+        </div>
+
+        <div id="login-form" class="auth-form">
+            <h2>Login</h2>
+            <input type="text" id="login-username" placeholder="Username">
+            <input type="password" id="login-password" placeholder="Password">
+            <button onclick="login()">Login</button>
+        </div>
+
+        <div id="register-form" class="auth-form hidden">
+            <h2>Register</h2>
+            <input type="text" id="reg-username" placeholder="Username">
+            <input type="password" id="reg-password" placeholder="Password">
+            <select id="reg-type">
+                <option value="student">Student</option>
+                <option value="farmer">Farmer</option>
+                <option value="unemployed">Unemployed</option>
+                <option value="worker">Worker</option>
+                <option value="other">Other</option>
+            </select>
+            <button onclick="register()">Register</button>
+        </div>
+        <p id="auth-msg"></p>
+    </div>
+
+    <!-- Dashboard Section -->
+    <div id="dashboard-section" class="container hidden">
+        <div class="header">
+            <h2 id="user-greeting">Welcome</h2>
+            <button onclick="logout()" class="logout-btn">Logout</button>
+        </div>
+
+        <div class="nav-tabs">
+            <button class="nav-btn active" onclick="switchTab('profile')">Profile</button>
+            <button class="nav-btn" onclick="switchTab('documents')">Documents</button>
+            <button class="nav-btn" onclick="switchTab('schemes')">Schemes</button>
+        </div>
+
+        <!-- Profile Tab -->
+        <div id="tab-profile" class="tab-content">
+            <h3>My Profile</h3>
+            <div class="form-grid">
+                <label>Full Name: <input type="text" id="prof-name"></label>
+                <label>DOB (YYYY-MM-DD): <input type="date" id="prof-dob"></label>
+                <label>State: <input type="text" id="prof-state"></label>
+                <label>District: <input type="text" id="prof-district"></label>
+                <label>Income (Annual): <input type="number" id="prof-income"></label>
+                <label>Category: 
+                    <select id="prof-category">
+                        <option value="">Select</option>
+                        <option value="General">General</option>
+                        <option value="OBC">OBC</option>
+                        <option value="SC">SC</option>
+                        <option value="ST">ST</option>
+                        <option value="Minority">Minority</option>
+                    </select>
+                </label>
+                <label>Aadhaar Number: <input type="text" id="prof-aadhaar"></label>
+                
+                <!-- Student Specific -->
+                <div class="student-fields hidden">
+                    <label>College Name: <input type="text" id="prof-college"></label>
+                    <label>Course: <input type="text" id="prof-course"></label>
+                </div>
+                
+                <!-- Farmer Specific -->
+                <div class="farmer-fields hidden">
+                    <label>Land Size (Acres): <input type="number" id="prof-land"></label>
+                    <label>Crop Type: <input type="text" id="prof-crop"></label>
+                </div>
+            </div>
+            <button onclick="saveProfile()" class="action-btn">Save Profile</button>
+        </div>
+
+        <!-- Documents Tab -->
+        <div id="tab-documents" class="tab-content hidden">
+            <h3>My Documents</h3>
+            <div class="upload-box">
+                <input type="text" id="doc-name-input" placeholder="Document Name (e.g. Aadhaar)">
+                <input type="file" id="doc-file-input">
+                <button onclick="uploadDocument()">Upload & Verify</button>
+            </div>
+            <div id="documents-list" class="cards-container">
+                <!-- Doc Cards injected here -->
+            </div>
+        </div>
+
+        <!-- Schemes Tab -->
+        <div id="tab-schemes" class="tab-content hidden">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+                <h3>Eligible Schemes</h3>
+                <button id="discover-btn" onclick="discoverSchemes()" style="background:#7c3aed;">Discover More Schemes (AI)</button>
+            </div>
+            <div id="eligible-schemes-list" class="cards-container"></div>
+            
+            <h3 style="margin-top: 30px; color: #666;">Ineligible / Action Required</h3>
+            <div id="ineligible-schemes-list" class="cards-container"></div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+fastapi
+uvicorn
+sqlmodel
+pydantic
+python-jose[cryptography]
+passlib[bcrypt]
+bcrypt==3.2.2
+python-multipart
+google-genai
+python-dotenv
+duckduckgo-search
+beautifulsoup4
+requests
+fpdf
+openai
