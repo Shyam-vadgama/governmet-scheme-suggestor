@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Depends, BackgroundTasks
 from sqlmodel import Session, select
-from ..database import get_session
-from ..models import User, Profile, Scheme
-from ..schemas import ProfileUpdate
-from ..dependencies import get_current_user
-from ..agent.researcher import search_and_extract_schemes
+from database import get_session
+from models import User, Profile, Scheme
+from schemas import ProfileUpdate
+from dependencies import get_current_user
+from agent.researcher import search_and_extract_schemes
 
 router = APIRouter(prefix="/profile", tags=["profile"])
 
@@ -21,7 +21,7 @@ def background_discovery(profile: Profile, session: Session):
         # We need a fresh session for the background thread usually, 
         # but passing the generator's session might be risky if closed.
         # Best to create a new session here.
-        from ..database import engine
+        from database import engine
         with Session(engine) as bg_session:
             existing = bg_session.exec(select(Scheme).where(Scheme.name == scheme.name)).first()
             if not existing:

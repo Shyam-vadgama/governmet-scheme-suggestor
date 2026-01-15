@@ -2,12 +2,12 @@ from fastapi import APIRouter, Depends, UploadFile, File, Form, HTTPException
 from sqlmodel import Session, select
 from typing import List
 import json
-from ..database import get_session
-from ..models import User, Document, DocumentStatus
-from ..schemas import DocumentRead, DocumentUpdate
-from ..dependencies import get_current_user
-from ..agent.advanced_core import smart_extract_document, verify_document_agentic
-from ..agent.core import validate_document_against_profile # Fallback deterministic verification
+from database import get_session
+from models import User, Document, DocumentStatus
+from schemas import DocumentRead, DocumentUpdate
+from dependencies import get_current_user
+from agent.advanced_core import smart_extract_document, verify_document_agentic
+from agent.core import validate_document_against_profile # Fallback deterministic verification
 
 router = APIRouter(prefix="/documents", tags=["documents"])
 

@@ -4,7 +4,7 @@ import re
 from datetime import datetime
 from difflib import SequenceMatcher
 import google.generativeai as genai
-from ..models import Profile, Document, Scheme, DocumentStatus
+from models import Profile, Document, Scheme, DocumentStatus
 
 # Configure Gemini if key is available
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")

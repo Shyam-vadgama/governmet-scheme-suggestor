@@ -1,5 +1,5 @@
 from fpdf import FPDF
-from ..models import Profile, Scheme, Document
+from models import Profile, Scheme, Document
 import json
 import os
 

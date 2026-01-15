@@ -1,13 +1,13 @@
 from fastapi import APIRouter, Depends
 from sqlmodel import Session, select
 from typing import List
-from ..database import get_session
-from ..models import User, Scheme
-from ..schemas import SchemeRead
-from ..dependencies import get_current_user
-from ..agent.advanced_core import check_eligibility_agentic
-from ..agent.researcher import search_and_extract_schemes
-from ..agent.action_taker import generate_application_kit
+from database import get_session
+from models import User, Scheme
+from schemas import SchemeRead
+from dependencies import get_current_user
+from agent.advanced_core import check_eligibility_agentic
+from agent.researcher import search_and_extract_schemes
+from agent.action_taker import generate_application_kit
 from fastapi.responses import FileResponse
 import os
 

@@ -12,9 +12,9 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 env_path = os.path.join(current_dir, ".env")
 load_dotenv(env_path)
 
-from .database import create_db_and_tables, engine
-from .models import Scheme
-from .routers import auth, profile, documents, schemes
+from database import create_db_and_tables, engine
+from models import Scheme
+from routers import auth, profile, documents, schemes
 
 app = FastAPI(title="AI Eligibility & Scheme Recommendation Agent")
 
@@ -73,4 +73,4 @@ def on_startup():
     create_initial_data()
 
 if __name__ == "__main__":
-    uvicorn.run("eligibility_agent.main:app", host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
