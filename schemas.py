@@ -1,6 +1,6 @@
 from typing import Optional, List
 from pydantic import BaseModel
-from .models import UserType, DocumentStatus
+from models import UserType, DocumentStatus
 
 class Token(BaseModel):
     access_token: str
