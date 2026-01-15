@@ -3,13 +3,7 @@ import os
 import re
 from datetime import datetime
 from difflib import SequenceMatcher
-import google.generativeai as genai
 from models import Profile, Document, Scheme, DocumentStatus
-
-# Configure Gemini if key is available
-GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
-if GOOGLE_API_KEY:
-    genai.configure(api_key=GOOGLE_API_KEY)
 
 # --- Helper Functions for Robust Matching ---
 
@@ -98,39 +92,6 @@ def dates_match(d1_str, d2_str):
     return d1_str.strip() == d2_str.strip()
 
 # --- Main Functions ---
-
-def extract_data_from_document(file_content: str, doc_type: str) -> dict:
-    """
-    Uses GenAI to extract structured data from document text/OCR.
-    """
-    if not GOOGLE_API_KEY:
-        # Mock behavior for testing without key
-        print("No Google API Key found. Returning mock data.")
-        return {"full_name": "Test User", "aadhaar_number": "123456789012"}
-
-    model = genai.GenerativeModel('gemini-pro')
-    prompt = f"""
-    You are a strict data extraction engine.
-    Extract the following fields from this {doc_type} text as a JSON object:
-    - full_name
-    - dob (YYYY-MM-DD)
-    - id_number (if Aadhaar or PAN or College ID)
-    - institution_name (if academic)
-    - income (if income certificate)
-    
-    Return ONLY valid JSON.
-    
-    Document Text:
-    {file_content}
-    """
-    
-    try:
-        response = model.generate_content(prompt)
-        text = response.text.replace("```json", "").replace("```", "")
-        return json.loads(text)
-    except Exception as e:
-        print(f"Error extracting data: {e}")
-        return {}
 
 def validate_document_against_profile(profile: Profile, doc_data: dict, doc_type: str) -> (DocumentStatus, str):
     """
