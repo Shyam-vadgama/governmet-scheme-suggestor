@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:8000";
+const API_URL = "";
 let token = localStorage.getItem("token");
 let currentUserType = "";
 
